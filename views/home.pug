@@ -1,0 +1,26 @@
+extends layout.pug
+
+block content
+  table(hx-get="/latest-orders" hx-swap="beforeend" hx-trigger="load")
+    thead
+      tr
+        th Förnamn
+        th Efternamn
+        th Vara
+        th Datum
+        th Ändra Status
+
+  form(class='w-100 flex flex-col gap-2 m-2 p-4 border' hx-post="/api/new-order")
+    div
+      p Förnamn
+      input(class='border w-full rounded')
+    div
+      p Efternamn
+      input(class='border w-full rounded')
+    div
+      p E-Mail
+      input(class='border w-full rounded')
+    div
+      p Telefon
+      input(class='border w-full rounded')
+    button(class='bg-green-400 text-white p-2 rounded' type='submit') Skicka
