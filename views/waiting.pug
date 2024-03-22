@@ -1,0 +1,17 @@
+extends layout.pug
+
+block content
+  div(class="bg-white rounded p-8 flex-grow")
+    table(hx-get="/api/order/get-all-waiting-orders" hx-swap="innerHTML" hx-target="#tablebody" hx-trigger="load")
+        thead(class="text-gray-600")
+          tr
+            th(class="p-4") Förnamn
+            th(class="p-4") Efternamn
+            th(class="p-4") Vara
+            th(class="p-4") Antal
+            th(class="p-4") Telefon
+            th(class="p-4") Mail
+            th(class="p-4") Datum
+            th(class="p-4") Status
+            th(class="p-4") 
+        tbody(id="tablebody")
