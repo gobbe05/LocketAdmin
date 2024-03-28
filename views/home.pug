@@ -4,23 +4,21 @@ block content
   div(x-data="{newOpen: false}" class="flex flex-col 2xl:flex-row items-start justify-center w-full gap-8")
     div(class="w-full flex-grow")
       div(class="flex items-center gap-4")
-        div(hx-get="/api/order/card-order-count" hx-swap="outerHTML" hx-trigger="load")
+        div(class="p-16 grid place-content-center" hx-get="/api/order/card-order-count" hx-swap="outerHTML" hx-trigger="load")
+          div(class="loader")
+        div(class="p-16 grid place-content-center" hx-get="/api/order/card-printed-count" hx-swap="outerHTML" hx-trigger="load")
+          div(class="loader")
+        div(class="p-16 grid place-content-center" hx-get="/api/order/card-sent-count" hx-swap="outerHTML" hx-trigger="load")
+          div(class="loader")
+
         div(hx-get="/api/order/card-delivered-count" hx-swap="outerHTML" hx-trigger="load")
-        button(@click="newOpen = !newOpen" class="bg-orange-400 text-white material-symbols-outlined ml-auto p-4 bg-white rounded-full") add
+          div(class="loader")
+        button(@click="newOpen = !newOpen" class="bg-orange-400 text-white material-symbols-outlined ml-auto p-4 rounded-full") add
       div(class="mt-4 p-8 bg-white rounded")
-        table(class="p-8 bg-white" hx-get="/api/order/get-all-orders" hx-swap="innerHTML" hx-target="#tablebody" hx-trigger="load")
-          thead(class="text-gray-600")
-            tr
-              th(class="p-2 lg:p-4") Förnamn
-              th(class="p-2 lg:p-4") Efternamn
-              th(class="p-2 lg:p-4") Vara
-              th(class="p-2 lg:p-4") Antal 
-              th(class="p-2 lg:p-4 hidden xl:table-cell") Telefon
-              th(class="p-2 lg:p-4 hidden xl:table-cell") Mail
-              th(class="p-2 lg:p-4 hidden xl:table-cell") Datum
-              th(class="p-2 lg:p-4") Status
-              th(class="p-2 lg:p-4") 
-          tbody(id="tablebody")
+        table(class="p-8 bg-white" hx-get="/api/order/get-all-orders" hx-swap="innerHTML" hx-trigger="load") 
+          tbody(id="tablebody") 
+            th(class="p-8 loader")
+    
     div(x-show="newOpen" class="fixed grid grid-cols-[80%] place-content-center bg-[rgb(0,0,0,0.3)] w-dvw h-dvh top-0 left-0")
       div(class="bg-white p-8 rounded w-full")
         form(class='w-100 flex flex-col gap-2' hx-swap="none" hx-post="/api/order/create-order")
@@ -41,7 +39,10 @@ block content
             input(class='border w-full rounded' name="phone")
           div
             p Vara
-            input(class='border w-full rounded' name="item")
+            select(class='p-1 border w-full rounded cursor-pointer' name="item")
+              option(value="Vanlig") Vanlig
+              option(value="Morgon") Morgon
+              option(value="Kväll") Kväll
           div
             p Kvantitet 
             input(class='border w-full rounded' type="number" name="quantity")

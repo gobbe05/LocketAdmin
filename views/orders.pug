@@ -2,7 +2,7 @@ extends layout.pug
 
 block content
   div(class="bg-white rounded p-8 flex-grow")
-    table(hx-get="/api/order/get-all-orders" hx-swap="innerHTML" hx-target="#tablebody" hx-trigger="load")
+    table(hx-get="/api/order/get-all-orders" hx-swap="innerHTML" hx-trigger="load")
         thead(class="text-gray-600")
           tr
             th(class="p-4") Förnamn
